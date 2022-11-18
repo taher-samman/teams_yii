@@ -1,0 +1,26 @@
+{
+  "enableCsrfValidation": true,
+  "csrfParam": "_csrf-backend",
+  "csrfCookie": { "httpOnly": true },
+  "enableCsrfCookie": true,
+  "enableCookieValidation": true,
+  "cookieValidationKey": "2sLYqWpDj6-lP1--iQrmcwiSY3N-FP8w",
+  "methodParam": "_method",
+  "parsers": [],
+  "trustedHosts": [],
+  "secureHeaders": [
+    "X-Forwarded-For",
+    "X-Forwarded-Host",
+    "X-Forwarded-Proto",
+    "X-Forwarded-Port",
+    "Front-End-Https",
+    "X-Rewrite-Url",
+    "X-Original-Host"
+  ],
+  "ipHeaders": ["X-Forwarded-For"],
+  "portHeaders": ["X-Forwarded-Port"],
+  "secureProtocolHeaders": {
+    "X-Forwarded-Proto": ["https"],
+    "Front-End-Https": ["on"]
+  }
+}
