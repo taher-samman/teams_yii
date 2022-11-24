@@ -1,0 +1,112 @@
+html {
+  font-size: 15px;
+}
+html body header {
+  width: 15%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  color: white;
+  padding: 1rem;
+}
+html body header::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0%;
+  z-index: 0;
+  background-color: #29b2e8de;
+}
+html body header nav {
+  position: relative;
+  z-index: 1;
+}
+html body header nav .navbar-brand {
+  display: block;
+  text-align: center;
+  font-size: 1.5rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid white;
+}
+html body header nav .nav .nav-item {
+  border-radius: 5px;
+}
+html body header nav .nav .nav-item .nav-link {
+  color: white;
+  font-size: 1.2rem;
+}
+html body header nav .nav .nav-item:has(.active) {
+  background-color: white;
+}
+html body header nav .nav .nav-item:has(.active) .nav-link {
+  color: #29b2e8;
+}
+html body main {
+  width: 80%;
+  height: 100%;
+  margin-left: auto;
+}
+html body main .c-header {
+  padding: 2rem 0;
+}
+html body main .c-header .switcher-languages {
+  margin-left: auto;
+}
+html body main .c-header .switcher-languages .switcher-languages-form .field-admin-language {
+  margin-bottom: 0% !important;
+}
+html body main .c-header .switcher-languages .switcher-languages-form .field-admin-language .form-select {
+  border: 1px solid #29b2e8;
+}
+html body main .c-header .logout {
+  color: #29b2e8;
+}
+html body main .c-index {
+  padding: 2rem 0;
+}
+html body main .c-index .r-index .add-institution-form {
+  padding: 0.5rem;
+  border: 1px solid #DCDCDC;
+  border-radius: 5px;
+}
+html body main .c-index .r-index .table-institutions {
+  border-bottom: 1px solid #DCDCDC;
+}
+html body main .c-index .r-index .table-institutions thead {
+  border-bottom: 1px solid black;
+}
+html body main .c-index .r-index .table-institutions thead tr th,
+html body main .c-index .r-index .table-institutions thead tr td {
+  padding: 0.5rem 0;
+}
+html body main .c-index .r-index .table-institutions tbody:not(:last-child) {
+  border-bottom: 1px solid #DCDCDC;
+}
+html body main .c-index .r-index .table-institutions tbody tr th,
+html body main .c-index .r-index .table-institutions tbody tr td {
+  padding: 0.5rem 0;
+}
+html body main .c-index .r-index .table-institutions tbody tr th .fa,
+html body main .c-index .r-index .table-institutions tbody tr td .fa {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #29b2e8;
+}
+html body main .c-index .r-index .table-institutions tbody tr th .colleges-grid,
+html body main .c-index .r-index .table-institutions tbody tr td .colleges-grid {
+  padding: 0.5rem 2rem;
+  border: 1px solid #29b2e8;
+  border-radius: 5px;
+}
+html body main .c-index .r-index .table-institutions tbody tr th .actions .fa,
+html body main .c-index .r-index .table-institutions tbody tr td .actions .fa {
+  color: black;
+  font-size: 1.2rem;
+  padding: 0 0.5rem;
+}

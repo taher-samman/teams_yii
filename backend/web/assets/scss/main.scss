@@ -1,0 +1,155 @@
+$blue:#29b2e8;
+$white: white;
+$black: black;
+
+html {
+    font-size: 15px;
+
+    body {
+        header {
+            width: 15%;
+            height: 100%;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            color: $white;
+            padding: 1rem;
+
+            &::before {
+                content: '';
+                display: block;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0%;
+                left: 0%;
+                z-index: 0;
+                background-color: #29b2e8de;
+            }
+
+            nav {
+                position: relative;
+                z-index: 1;
+
+                .navbar-brand {
+                    display: block;
+                    text-align: center;
+                    font-size: 1.5rem;
+                    padding-bottom: .5rem;
+                    margin-bottom: .5rem;
+                    border-bottom: 1px solid $white;
+                }
+
+                .nav {
+                    .nav-item {
+                        border-radius: 5px;
+
+                        .nav-link {
+                            color: $white;
+                            font-size: 1.2rem;
+                        }
+
+                        &:has(.active) {
+                            background-color: $white;
+
+                            .nav-link {
+                                color: $blue;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        main {
+            width: 80%;
+            height: 100%;
+            margin-left: auto;
+
+            .c-header {
+                padding: 2rem 0;
+
+                .switcher-languages {
+                    margin-left: auto;
+
+                    .switcher-languages-form {
+                        .field-admin-language {
+                            margin-bottom: 0% !important;
+
+                            .form-select {
+                                border: 1px solid $blue;
+                            }
+                        }
+                    }
+                }
+                .logout{
+                    color: $blue;
+                }
+            }
+
+            .c-index {
+                padding: 2rem 0;
+
+                .r-index {
+                    .add-institution-form {
+                        padding: .5rem;
+                        border: 1px solid #DCDCDC;
+                        border-radius: 5px;
+                    }
+
+                    .table-institutions {
+                        border-bottom: 1px solid #DCDCDC;
+
+                        thead {
+                            border-bottom: 1px solid $black;
+
+                            tr {
+
+                                th,
+                                td {
+                                    padding: .5rem 0;
+                                }
+                            }
+                        }
+
+                        tbody {
+
+                            &:not(:last-child) {
+                                border-bottom: 1px solid #DCDCDC;
+                            }
+
+                            tr {
+
+                                th,
+                                td {
+                                    padding: .5rem 0;
+
+                                    .fa {
+                                        cursor: pointer;
+                                        font-size: 1.5rem;
+                                        color: $blue;
+                                    }
+
+                                    .colleges-grid {
+                                        padding: .5rem 2rem;
+                                        border: 1px solid $blue;
+                                        border-radius: 5px;
+                                    }
+
+                                    .actions {
+                                        .fa {
+                                            color: $black;
+                                            font-size: 1.2rem;
+                                            padding: 0 .5rem;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
