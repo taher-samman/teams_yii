@@ -42,7 +42,7 @@ class Colleges extends \yii\db\ActiveRecord
             ],
             [
                 'class' => FillTranslationFieldsBehavior::class,
-                'fields' => ['name'],
+                'fields' => ['attribute_code' => 'name'],
                 'translationClass' => CollegesTranslations::class
             ]
         ];
@@ -54,7 +54,7 @@ class Colleges extends \yii\db\ActiveRecord
     {
         return [
             [['institution_id'], 'required'],
-            [['institution_id'], 'integer'],
+            // [['institution_id'], 'integer'],
             [['status'], 'default', 'value' => Types::STATUS_ENABLED],
             [['created_at', 'updated_at'], 'safe'],
             [['institution_id'], 'exist', 'skipOnError' => true, 'targetClass' => Institutions::class, 'targetAttribute' => ['institution_id' => 'id']],
@@ -69,6 +69,7 @@ class Colleges extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'institution_id' => 'Institution ID',
+            'name' => 'Name',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];

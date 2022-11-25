@@ -43,7 +43,7 @@ class Institutions extends \yii\db\ActiveRecord
             ],
             [
                 'class' => FillTranslationFieldsBehavior::class,
-                'fields' => ['name'],
+                'fields' => ['attribute_code' => 'name'],
                 'translationClass' => InstitutionsTranslations::class
             ]
         ];

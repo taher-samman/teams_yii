@@ -36,6 +36,7 @@ function onClickRowInstitution(e) {
                     tbody.appendChild(tr);
                 },
                 error: function (data) {
+                    console.log(data);
                     alert("Error occured.please try again");
                 },
                 dataType: 'html'
@@ -54,12 +55,14 @@ function addCollegeForm(e) {
                 id: id
             },
             success: function (data) {
-                $('#helper-modal .modal-body').html(data);
+                $('#helper-modal .modal-body').html(data['html']);
+                eval(eval(`\`${data['js']}\``));
             },
             error: function (data) {
+                console.log(data);
                 alert("Error occured.please try again");
             },
-            dataType: 'html'
+            dataType: 'json'
         });
     })(jQuery);
 }
@@ -77,6 +80,7 @@ function editCollegeForm(e) {
                 $('#helper-modal .modal-body').html(data);
             },
             error: function (data) {
+                console.log(data);
                 alert("Error occured.please try again");
             },
             dataType: 'html'
@@ -97,6 +101,7 @@ function editInstitutionForm(e) {
                 $('#helper-modal .modal-body').html(data);
             },
             error: function (data) {
+                console.log(data);
                 alert("Error occured.please try again");
             },
             dataType: 'html'
@@ -117,6 +122,7 @@ function manageCollegesContent(e) {
                 $('#helper-offcanvas .offcanvas-body').html(data);
             },
             error: function (data) {
+                console.log(data);
                 alert("Error occured.please try again");
             },
             dataType: 'html'
@@ -139,6 +145,7 @@ function addSpecializationForm(e) {
                 $('#helper-modal .modal-body').html(data);
             },
             error: function (data) {
+                console.log(data);
                 alert("Error occured.please try again");
             },
             dataType: 'html'

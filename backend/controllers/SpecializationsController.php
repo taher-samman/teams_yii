@@ -2,14 +2,7 @@
 
 namespace backend\controllers;
 
-use common\components\CollegesGrid;
-use common\components\InstitutionsGrid;
-use common\components\SpecializationsGrid;
-use common\models\Colleges;
-use common\models\Institutions;
 use common\models\Specializations;
-use common\models\Types;
-use rmrevin\yii\fontawesome\FA;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;

@@ -3,7 +3,9 @@
 namespace backend\controllers;
 
 use common\models\Institutions;
+use common\models\InstitutionsTranslations;
 use common\models\Types;
+use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\helpers\Html;
@@ -97,20 +99,30 @@ class InstitutionsController extends Controller
         ob_start();
         $id = get('id');
         $institutionsModel = Institutions::findOne($id);
-        $form = ActiveForm::begin([
-            'action' => Url::toRoute(['institutions/edit', 'id' => $id]),
-            'id' => 'edit-institution-form',
-            'options' => ['class' => 'edit-institution-form form-horizontal'],
-        ]);
-        echo '<h3 class="form-title">Edit Institution</h3>';
-        echo $form->field($institutionsModel, 'name')->label(false)->textInput(['placeholder' => 'Name']);
-        echo '<div class="form-check form-switch">';
-        echo $form->field($institutionsModel, 'status')->checkbox(['class' => 'form-check-input']);
-        echo '</div>';
-        echo $form->field($institutionsModel, 'type')->dropDownList(Types::getTypes(), ['prompt' => 'Select Type', 'class' => 'form-control mt-2'])->label(false);
+        if (!is_null($institutionsModel)) {
+            $institutionsTransModel = InstitutionsTranslations::find()
+                ->where(['entity_id' => $id, 'language' => Yii::$app->language, 'attribute_code' => 'name'])->one();
+            if (is_null($institutionsTransModel)) {
+                $institutionsTransModel = new InstitutionsTranslations();
+            }
+            $form = ActiveForm::begin([
+                'action' => Url::toRoute(['institutions/edit', 'id' => $id]),
+                'id' => 'edit-institution-form',
+                'options' => ['class' => 'edit-institution-form form-horizontal'],
+            ]);
+            echo '<h3 class="form-title">Edit Institution</h3>';
+            echo $form->field($institutionsTransModel, 'attribute_code[name]')->label(false)->textInput([
+                'placeholder' => 'Name',
+                'value' => $institutionsTransModel->value
+            ]);
+            echo '<div class="form-check form-switch">';
+            echo $form->field($institutionsModel, 'status')->checkbox(['class' => 'form-check-input']);
+            echo '</div>';
+            echo $form->field($institutionsModel, 'type')->dropDownList(Types::getTypes(), ['prompt' => 'Select Type', 'class' => 'form-control mt-2'])->label(false);
 
-        echo Html::submitButton('Edit', ['class' => 'btn btn-primary mt-2']);
-        ActiveForm::end();
+            echo Html::submitButton('Edit', ['class' => 'btn btn-primary mt-2']);
+            ActiveForm::end();
+        }
         $html = ob_get_clean();
         return $html;
     }

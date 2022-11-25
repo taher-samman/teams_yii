@@ -1,4 +1,7 @@
 <?php
+
+use common\extensions\components\LanguagesBootstrap;
+
 function app()
 {
     return Yii::$app;
@@ -21,5 +24,8 @@ function setFlash($type, $msg)
 }
 function userLang()
 {
-    return Yii::$app->user->identity->language;
+    if (!Yii::$app->user->isGuest) {
+        return Yii::$app->user->identity->language;
+    }
+    return LanguagesBootstrap::$languages[0];
 }

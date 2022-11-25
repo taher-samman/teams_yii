@@ -6,6 +6,7 @@ use common\components\CollegesGrid;
 use common\components\InstitutionsGrid;
 use common\components\SpecializationsGrid;
 use common\models\Colleges;
+use common\models\CollegesTranslations;
 use common\models\Institutions;
 use common\models\Types;
 use rmrevin\yii\fontawesome\FA;
@@ -95,6 +96,7 @@ class CollegesController extends Controller
         ob_start();
         $id = get('id');
         $collegesModal = new Colleges();
+        $collegesTransModal = new CollegesTranslations();
         $form = ActiveForm::begin([
             'action' => Url::toRoute(['colleges/add']),
             'id' => 'add-college-form',
@@ -102,11 +104,16 @@ class CollegesController extends Controller
         ]);
         echo '<h3 class="form-title">Add College</h3>';
         echo $form->field($collegesModal, 'institution_id')->hiddenInput(['value' => $id])->label(false);
-        echo $form->field($collegesModal, 'name')->label(false)->textInput(['placeholder' => 'Name']);
+        echo $form->field($collegesTransModal, 'attribute_code[name]')->label(false)->textInput(['placeholder' => 'Name']);
         echo Html::submitButton('Add', ['class' => 'btn btn-primary mt-2']);
+        $js = $form->ajaxRegisterClientScript();
         ActiveForm::end();
         $html = ob_get_clean();
-        return $html;
+        $result = [
+            'html' => $html,
+            'js' => $js
+        ];
+        return json_encode($result);
     }
     public function actionAdd()
     {
@@ -127,19 +134,29 @@ class CollegesController extends Controller
         ob_start();
         $id = get('id');
         $collegesModal = Colleges::findOne($id);
-        $form = ActiveForm::begin([
-            'action' => Url::toRoute(['colleges/edit', 'id' => $id]),
-            'id' => 'edit-college-form',
-            'enableAjaxValidation' => true,
-            'options' => ['class' => 'edit-college-form form-horizontal'],
-        ]);
-        echo '<h3 class="form-title">Edit College</h3>';
-        echo $form->field($collegesModal, 'name')->label(false)->textInput(['placeholder' => 'Name']);
-        echo '<div class="form-check form-switch">';
-        echo $form->field($collegesModal, 'status')->checkbox(['class' => 'form-check-input']);
-        echo '</div>';
-        echo Html::submitButton('Edit', ['class' => 'btn btn-primary mt-2']);
-        ActiveForm::end();
+        if (!is_null($collegesModal)) {
+            $collegesTransModal = CollegesTranslations::find()
+                ->where(['entity_id' => $id, 'language' => Yii::$app->language, 'attribute_code' => 'name'])->one();
+            if (is_null($collegesTransModal)) {
+                $collegesTransModal = new CollegesTranslations();
+            }
+            $form = ActiveForm::begin([
+                'action' => Url::toRoute(['colleges/edit', 'id' => $id]),
+                'id' => 'edit-college-form',
+                'enableAjaxValidation' => true,
+                'options' => ['class' => 'edit-college-form form-horizontal'],
+            ]);
+            echo '<h3 class="form-title">Edit College</h3>';
+            echo $form->field($collegesTransModal, 'attribute_code[name]')->label(false)->textInput([
+                'placeholder' => 'Name',
+                'value' => $collegesTransModal->value
+            ]);
+            echo '<div class="form-check form-switch">';
+            echo $form->field($collegesModal, 'status')->checkbox(['class' => 'form-check-input']);
+            echo '</div>';
+            echo Html::submitButton('Edit', ['class' => 'btn btn-primary mt-2']);
+            ActiveForm::end();
+        }
         $html = ob_get_clean();
         return $html;
     }
